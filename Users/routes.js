@@ -13,27 +13,34 @@ export default function UserRoutes(app) {
 
         res.json(currentUser);
     };
+    app.post("/api/users/profile", profile);
 
     const createUser = async (req, res) => {
         const user = await dao.createUser(req.body);
         res.json(user);
     };
+    app.post("/api/users", createUser);
 
+    
     const deleteUser = async (req, res) => {
         const status = await dao.deleteUser(req.params.userId);
         res.json(status);
     };
+    app.delete("/api/users/:userId", deleteUser);
 
 
     const findAllUsers = async (req, res) => {
         const users = await dao.findAllUsers();
         res.json(users);
     };
+    app.get("/api/users", findAllUsers);
     
+
     const findUserById = async (req, res) => {
         const user = await dao.findUserById(req.params.userId);
         res.json(user);
     };
+    app.get("/api/users/:userId", findUserById);
 
 
     const updateUser = async (req, res) => {
@@ -42,6 +49,8 @@ export default function UserRoutes(app) {
         currentUser = await dao.findUserById(userId);
         res.json(status);
     };
+    app.put("/api/users/:userId", updateUser);
+
 
     const signup = async (req, res) => {
         const user = await dao.findUserByUsername(req.body.username);
@@ -53,6 +62,7 @@ export default function UserRoutes(app) {
         req.session["currentUser"] = currentUser;
         res.json(currentUser);
     };
+    app.post("/api/users/signup", signup);
 
     const signin = async (req, res) => {
         const { username, password } = req.body;
@@ -63,24 +73,17 @@ export default function UserRoutes(app) {
         } else {
             res.sendStatus(401);
         }
-
     };
+    app.post("/api/users/signin", signin);
+
 
     const signout = (req, res) => {
         req.session.destroy();
         res.sendStatus(200);
     };
-
-
-
-    app.post("/api/users", createUser);
-    app.get("/api/users", findAllUsers);
-    app.get("/api/users/:userId", findUserById);
-    app.put("/api/users/:userId", updateUser);
-    app.delete("/api/users/:userId", deleteUser);
-    app.post("/api/users/signup", signup);
-    app.post("/api/users/signin", signin);
     app.post("/api/users/signout", signout);
-    app.post("/api/users/profile", profile);
+
+
+    
     
 }

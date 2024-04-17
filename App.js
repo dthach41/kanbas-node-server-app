@@ -9,13 +9,14 @@ import UserRoutes from "./Users/routes.js";
 import session from "express-session";
 import "dotenv/config";
 import { MongoClient, ServerApiVersion } from "mongodb"
+import QuizRoutes from './Kanbas/quizzes/routes.js';
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
 mongoose.connect(CONNECTION_STRING);
 
 const app = express();
 
-console.log(CONNECTION_STRING)
+// console.log(CONNECTION_STRING)
 
 app.use(
     cors({
@@ -45,11 +46,11 @@ app.use(session(sessionOptions));
 
 app.use(express.json());
 UserRoutes(app);
-
 Hello(app);
 Lab5(app);
 CourseRoutes(app);
 ModuleRoutes(app);
+QuizRoutes(app);
 
 app.listen(process.env.PORT || 4000);
 

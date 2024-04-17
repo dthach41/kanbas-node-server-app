@@ -33,7 +33,7 @@ app.use(
         cookie: {
             sameSite: "none",
             secure: true,
-            domain: "kanbas-node-server-app-a6-0ejr.onrender.com",
+            domain: process.env.HTTP_SERVER_DOMAIN,
         },
     })
 );

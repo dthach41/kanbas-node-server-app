@@ -13,11 +13,19 @@ export default function QuizRoutes(app) {
     const findQuizzesForCourse = async (req, res) => {
         const { courseId }  = req.params;
         // req.params is whatever is at the end of the url in the app.get(), in this case it's courseId
-        console.log(req.params)
+        // console.log(req.params)
         const quizzes = await dao.findQuizzesForCourse(courseId)
         res.json(quizzes)
     }
     app.get("/api/quizzes/:courseId", findQuizzesForCourse)
+
+
+    const addQuiz = async (req, res) => {
+        const { quiz } = req.params
+        const newQuiz = await dao.addQuiz(quiz)
+        res.json(newQuiz)
+    }
+    app.post("/api/quizzes/addQuiz", addQuiz);
 
 
 

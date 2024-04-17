@@ -23,6 +23,21 @@ app.use(
         origin: process.env.FRONTEND_URL
     })
 );
+
+app.use(
+    session({
+        secret: "super session secret",
+        resave: false,
+        saveUninitialized: false,
+        proxy: true,
+        cookie: {
+            sameSite: "none",
+            secure: true,
+            domain: "kanbas-node-server-app-a6-0ejr.onrender.com",
+        },
+    })
+);
+
 const sessionOptions = {
     secret: process.env.SESSION_SECRET,
     resave: false,

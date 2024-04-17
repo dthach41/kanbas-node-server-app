@@ -25,19 +25,6 @@ app.use(
     })
 );
 
-app.use(
-    session({
-        secret: "super session secret",
-        resave: false,
-        saveUninitialized: false,
-        proxy: true,
-        cookie: {
-            sameSite: "none",
-            secure: true,
-            domain: process.env.HTTP_SERVER_DOMAIN,
-        },
-    })
-);
 
 const sessionOptions = {
     secret: process.env.SESSION_SECRET,

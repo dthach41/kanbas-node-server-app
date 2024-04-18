@@ -26,7 +26,7 @@ const quizSchema = new mongoose.Schema({
     due: String,
     untilDate: String,
     points: String,
-    open: Boolean,
+    open: {type: Boolean, default: false},
     questions: [questionSchema],
 },
     { collection: "quizzes"});

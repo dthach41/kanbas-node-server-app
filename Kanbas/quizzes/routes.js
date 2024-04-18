@@ -21,7 +21,7 @@ export default function QuizRoutes(app) {
 
 
     const addQuiz = async (req, res) => {
-        const { quiz } = req.params
+        const quiz  = req.body
         const newQuiz = await dao.addQuiz(quiz)
         res.json(newQuiz)
     }

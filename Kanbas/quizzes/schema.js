@@ -1,13 +1,16 @@
 import mongoose from "mongoose";
 
-const questionSchema = new mongoose.Schema({
-    question: String,
-    answer: String
-});
 
 const quizSchema = new mongoose.Schema({
     courseId: {type: String, required: true},
     name: String,
+    description: String,
+    quizType: {
+        delete: {type: Boolean, default: false},
+        type: String,
+        enum: ["Graded Quiz", "Practice Quiz", "Graded Survey", "Ungraded Survey"],
+        default: "Graded Quiz"
+    },
     assignmentGroup: {
         type: String,
         enum: ["Quizzes", "Exams", "Assignments", "Project"],
@@ -27,7 +30,7 @@ const quizSchema = new mongoose.Schema({
     untilDate: {type: String, default: "Forever"},
     points: String,
     open: {type: Boolean, default: false},
-    questions: [questionSchema],
+    questions: [],
 },
     { collection: "quizzes"});
 

@@ -7,7 +7,6 @@ export default function QuizQuestionsRoute(app) {
         const { quizId } = req.params;
         // req.params is whatever is at the end of the url in the app.get(), in this case it's courseId
         const questions = await dao.findQuestionsForQuiz(quizId)
-        console.log(questions.length)
         res.json(questions)
     }
     app.get("/api/quizzes/quizQuestions/:quizId", findQuestionsForQuiz)
@@ -25,10 +24,17 @@ export default function QuizQuestionsRoute(app) {
         const { questionId } = req.params;
         const question = req.body
         const status = await dao.updateQuestion(questionId, question);
-        console.log(questionId)
+        console.log(question.question)
         res.json(status);
     }
     app.put("/api/quizzes/quizQuestions/:questionId", updateQuestion)
+
+    
+    const deleteQuestion = async (req, res) => {
+        const status = await dao.deleteQuestion(req.params.questionId);
+        res.json(status);
+    }
+    app.delete("/api/quizzes/quizQuestions/:questionId", deleteQuestion)
 
 
 

@@ -8,6 +8,7 @@ const answerSchema = new mongoose.Schema({
 
 const questionSchema = new mongoose.Schema({
     quizId: { type: String, required: true },
+    points: Number,
     questionType: {
         type: String,
         enum: ["Multiple Choice", "True False", "Fill In Blank",],

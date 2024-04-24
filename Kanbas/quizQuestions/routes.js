@@ -24,7 +24,6 @@ export default function QuizQuestionsRoute(app) {
         const { questionId } = req.params;
         const question = req.body
         const status = await dao.updateQuestion(questionId, question);
-        console.log(question.question)
         res.json(status);
     }
     app.put("/api/quizzes/quizQuestions/:questionId", updateQuestion)
